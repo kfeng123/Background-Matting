@@ -15,6 +15,7 @@ import torch.nn.functional as F
 import torchvision.transforms as transforms
 import torchvison.models as models
 
+import pdb
 
 
 
@@ -25,7 +26,7 @@ args=parser.parse_args()
 
 dir_name=args.input_dir;
 
-download_path = 'pretrained/xxx.pth'
+download_path = 'pretrained/deeplabv3_resnet50_coco-cd0a2569.pth'
 
 
 ## setup ####################
@@ -37,7 +38,7 @@ LABEL_NAMES = np.asarray([
 ])
 
 
-MODEL = models.segmentation.deeplabv3_resnet101(pretrained=False, progress=True, num_classes=21, aux_loss=None)
+MODEL = models.segmentation.deeplabv3_resnet50(pretrained=False, progress=True, num_classes=21, aux_loss=None)
 
 MODEL = DeepLabModel(download_path)
 
@@ -67,6 +68,8 @@ for i in range(0,len(list_im)):
 	result = MODEL(tensor_image)
 
         result = result.data.cpu().numpy()
+
+        pdb.set_trace()
 
 	#seg=cv2.resize(seg.astype(np.uint8),image.size)
 
